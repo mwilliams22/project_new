@@ -1,6 +1,6 @@
 import os
 from app import app
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session, url_for 
 
 from flask_pymongo import PyMongo
 
@@ -29,12 +29,21 @@ def signup():
         existing_user = users.find_one({"username":request.form['username']})
         if existing_user is None:
             users.insert({"username":request.form['username'], "password":request.form['password']})
-            return "User saved"
+            return redirect(url_for('market'))
         else:
             message = "That username is taken. Try logging in or try a different username."
             return render_template('signup.html', message = message)
     else:
-        return render_template('signup.html', message = '')
+        return render_template('signup.html', message = "")
+        
+@app.route('/market', methods = ["POST", "GET"])
+
+def market():
+    if request.method == "GET":
+        return render_template('market.html')
+    else:
+        message = "Your supermarket has been saved"
+        return render_template('profile.html', message = message)
         
 @app.route('/login', methods= ["POST", "GET"])
 
@@ -47,10 +56,24 @@ def login():
             #check if the password is right
             if existing_user['password'] == request.form["password"] :
                 session['username'] = request.form['username']
-                return redirect(url_for('index'))
+                return redirect(url_for('profile'))
             else:
-                return "Your password doesn't match your username."
+                message = "Your password doesn't match your username."
+                return render_template('login.html', message = message)
         else:
-            return "There is no user with that username. Try making an account."
+            message = "There is no user with that username. Try making an account."
+            return render_template('signup.html', message = message)
     else:
-        return render_template('login.html', message = '')
+        return render_template('login.html', message = "")
+
+# lOG OUT
+@app.route('/logout')
+
+def logout():
+    session.clear()
+    return redirect('/')
+
+@app.route('/profile', methods = ["POST", "GET"])
+
+def profile():
+    return render_template('profile.html', message= "")
