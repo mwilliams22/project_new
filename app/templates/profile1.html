@@ -54,7 +54,7 @@
 					<div class="inner">
 						<h2><span class="icon solid major fa-cart-plus"></span>Shopping list.</h2>
 						<p>Add items to your shopping list for the next visit to your supermarket.</p>
-						<form autocomplete = "off" method='POST' action='/shopping'>
+						<form method='POST' action='/login'>
 							<input type='text' name='item' placeholder='New item'><br>
 							<input type='submit' value='Add'>
 						</form>
@@ -74,7 +74,7 @@
 				<h2>Meal Prep Calendar</h2>
 				<p>Plan your meals here</p>
 				<div class="features">
-					<form autocomplete = "off" method='POST' action='/meals/new'>
+					<form method='POST' action='/meals'>
 						<input type="text" name="date" placeholder="Date"><br>
 						<input type='text' name='breakfast' placeholder='Breakfast'> <br>
 						<input type='text' name='lunch' placeholder='Lunch'><br>
@@ -93,16 +93,12 @@
 				<div class="content">
 					<div class="inner">
 						<h2><span class="icon solid major fa-drumstick-bite"></span>Your Meals.</h2>
-						<ul>
-							{% for meal in meals %}
-							<li>{{ meals.date }} -- Breakfast: {{ meals.breakfast }} Lunch: {{meals.lunch}} Dinner: {{meals.dinner}}</li> {% endfor %}
-						</ul>
+						<p>You have no meals yet.</p>
 						<p>Add meals <a href="#two">here</a></p>
 					</div>
 				</div>
 
 			</section>
-		</section>
 
 	</div>
 

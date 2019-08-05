@@ -20,6 +20,7 @@
         <div class="inner">
             <nav>
                 <ul>
+                    <li><a href="/index">Prepared</a></li>
                     <li><a href="#intro">Log in</a></li>
                     <li><a href="/signup">Sign up</a></li>
                 </ul>
@@ -37,7 +38,7 @@
                 <h1>Log in</h1>
                 <span class="icon solid major fa-sign-in-alt"></span>
                 {{message}}
-                <form method='POST' action='/login'>
+                <form autocomplete = "off" method='POST' action='/login'>
                     <input type='text' name='username' placeholder='Username'> <br>
                     <input type='text' name='password' placeholder='Password'><br>
                     <input type='submit' value='Log in'>

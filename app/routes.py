@@ -43,7 +43,7 @@ def market():
         return render_template('market.html')
     else:
         message = "Your supermarket has been saved"
-        return render_template('profile.html', message = message)
+        return render_template('profile1.html', message = message)
         
 @app.route('/login', methods= ["POST", "GET"])
 
@@ -58,7 +58,7 @@ def login():
                 session['username'] = request.form['username']
                 return redirect(url_for('profile'))
             else:
-                message = "Your password doesn't match your username."
+                message = "Your password doesn't match your username.Try again."
                 return render_template('login.html', message = message)
         else:
             message = "There is no user with that username. Try making an account."
@@ -77,3 +77,17 @@ def logout():
 
 def profile():
     return render_template('profile.html', message= "")
+
+@app.route('/meals/new', methods= ["GET", "POST"])
+
+def meals_new():
+    userdata = dict(request.form)
+    meals = mongo.db.meals
+    meals.insert(userdata)
+    return render_template('profile.html')
+    
+@app.route('/shopping', methods= ["GET", "POST"])
+
+def shopping():
+    userdata = dict(request.form)
+    meals 
