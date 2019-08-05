@@ -76,7 +76,24 @@ def logout():
 @app.route('/profile', methods = ["POST", "GET"])
 
 def profile():
-    return render_template('profile.html', message= "")
+    collection = mongo.db.meals
+    meals = collection.find({})
+    user_collection = mongo.db.user_items
+    user_items = user_collection.find({})
+    return render_template('profile.html', message= "", meals = meals, user_items = user_items)
+    
+@app.route('/add')
+
+def add():
+    # connect to the database
+    meals = mongo.db.meals
+    # insert new data
+    # events.insert({"event":"First Day of Classes", "date":"2019-08-21"})
+    # events.insert({"event":"Winter Break", "date":"2019-12-20"})
+    # events.insert({"event":"Finals Begin", "date":"2019-12-01"})
+    # events.insert({"event": "Madison's Birthday", "date":"2004-07-07"})
+    # return a message to the user
+    return "Event added"
 
 @app.route('/meals/new', methods= ["GET", "POST"])
 
@@ -84,10 +101,26 @@ def meals_new():
     userdata = dict(request.form)
     meals = mongo.db.meals
     meals.insert(userdata)
-    return render_template('profile.html')
+    return redirect('/profile')
     
 @app.route('/shopping', methods= ["GET", "POST"])
 
 def shopping():
+    user_items = mongo.db.user_items
+    items = mongo.db.items
+    items.insert({"potatoes"})
+    items.insert({"rice"})
+    items.insert({"milk"})
+    items.insert({"popcorn"})
     userdata = dict(request.form)
-    meals 
+    existing_item = items.find_one({"item":request.form["item"]})
+    user_items.insert(userdata)
+    if existing_item:
+        message1 = ": This item is in your supermarket!"
+        return render_template('profile.html', message1 = message1)
+    else:
+        message1 = ": This item is not in your supermarket!"
+        return  render_template('profile.html', message1 = message1)
+    
+    
+    

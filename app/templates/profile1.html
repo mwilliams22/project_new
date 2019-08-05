@@ -49,15 +49,19 @@
 		<!-- One -->
 		<section id="one" class="wrapper style2 spotlights">
 			<section>
-				<a href="#" class="image"><img src="/static/new_images/ingredients.jpg" alt="" data-position="center center" /></a>
+				<!--<a href="#" class="image"><img src="/static/new_images/ingredients.jpg" alt="" data-position="center center" /></a>-->
 				<div class="content">
 					<div class="inner">
 						<h2><span class="icon solid major fa-cart-plus"></span>Shopping list.</h2>
 						<p>Add items to your shopping list for the next visit to your supermarket.</p>
-						<form method='POST' action='/login'>
+						<form autocomplete="off" method='POST' action='/shopping'>
 							<input type='text' name='item' placeholder='New item'><br>
 							<input type='submit' value='Add'>
 						</form>
+						<ul>
+							{% for item in items %}
+							<li>{{item}}} {{message1}}</li> {% endfor %}
+						</ul>
 					</div>
 				</div>
 
@@ -74,7 +78,7 @@
 				<h2>Meal Prep Calendar</h2>
 				<p>Plan your meals here</p>
 				<div class="features">
-					<form method='POST' action='/meals'>
+					<form autocomplete="off" method='POST' action='/meals/new'>
 						<input type="text" name="date" placeholder="Date"><br>
 						<input type='text' name='breakfast' placeholder='Breakfast'> <br>
 						<input type='text' name='lunch' placeholder='Lunch'><br>
@@ -89,16 +93,21 @@
 		<!-- Three -->
 		<section id="three" class="wrapper style2 spotlights">
 			<section>
-				<a href="#" class="image"><img src="/static/new_images/banner.jpg" alt="" data-position="center center" /></a>
+				<!--<a href="#" class="image"><img src="/static/new_images/banner.jpg" alt="" data-position="center center" /></a>-->
 				<div class="content">
 					<div class="inner">
 						<h2><span class="icon solid major fa-drumstick-bite"></span>Your Meals.</h2>
-						<p>You have no meals yet.</p>
+						<ul>
+							{% for meal in meals %}
+							<li>{{ meal.date }} -- Breakfast: {{ meal.breakfast }} Lunch: {{meal.lunch}} Dinner: {{meal.dinner}}</li> 
+							{% endfor %}
+						</ul>
 						<p>Add meals <a href="#two">here</a></p>
 					</div>
 				</div>
 
 			</section>
+		</section>
 
 	</div>
 
