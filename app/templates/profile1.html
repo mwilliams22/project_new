@@ -58,10 +58,7 @@
 							<input type='text' name='item' placeholder='New item'><br>
 							<input type='submit' value='Add'>
 						</form>
-						<ul>
-							{% for item in items %}
-							<li>{{item}}} {{message1}}</li> {% endfor %}
-						</ul>
+						<p>You have no items in your shopping list.</p>
 					</div>
 				</div>
 
@@ -97,11 +94,7 @@
 				<div class="content">
 					<div class="inner">
 						<h2><span class="icon solid major fa-drumstick-bite"></span>Your Meals.</h2>
-						<ul>
-							{% for meal in meals %}
-							<li>{{ meal.date }} -- Breakfast: {{ meal.breakfast }} Lunch: {{meal.lunch}} Dinner: {{meal.dinner}}</li> 
-							{% endfor %}
-						</ul>
+						<p>You have no meals yet.</p>
 						<p>Add meals <a href="#two">here</a></p>
 					</div>
 				</div>

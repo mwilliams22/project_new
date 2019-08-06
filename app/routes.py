@@ -106,21 +106,27 @@ def meals_new():
 @app.route('/shopping', methods= ["GET", "POST"])
 
 def shopping():
-    user_items = mongo.db.user_items
+    collection = mongo.db.meals
+    meals = collection.find({})
+    user_collection = mongo.db.user_items
+    user_items = user_collection.find({})
     items = mongo.db.items
-    items.insert({"potatoes"})
-    items.insert({"rice"})
-    items.insert({"milk"})
-    items.insert({"popcorn"})
+    message1 = ""
+    message2 = ""
+    # items.insert({"item":"potatoes"})
+    # items.insert({"item":"rice"})
+    # items.insert({"item":"milk"})
+    # items.insert({"item":"popcorn"})
     userdata = dict(request.form)
     existing_item = items.find_one({"item":request.form["item"]})
-    user_items.insert(userdata)
-    if existing_item:
-        message1 = ": This item is in your supermarket!"
-        return render_template('profile.html', message1 = message1)
-    else:
+    user_collection.insert(userdata)
+    if existing_item is None:
         message1 = ": This item is not in your supermarket!"
-        return  render_template('profile.html', message1 = message1)
+        return  render_template('profile.html', meals = meals, user_items = user_items, message1 = message1)
+    else:
+        message2 = ": This item is in your supermarket!"
+        return  render_template('profile.html', meals = meals, user_items = user_items, message2 = message2)
+        
     
     
     

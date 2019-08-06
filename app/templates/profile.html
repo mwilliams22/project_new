@@ -56,11 +56,12 @@
 						<p>Add items to your shopping list for the next visit to your supermarket.</p>
 						<form autocomplete="off" method='POST' action='/shopping'>
 							<input type='text' name='item' placeholder='New item'><br>
+							<input type='text' name='num' placeholder='Number of items'><br>
 							<input type='submit' value='Add'>
 						</form>
 						<ul>
 							{% for item in user_items %}
-							<li>{{item}}} {{message1}}</li> {% endfor %}
+							<li>{{item.num}} {{item.item}} {{message1}}{{message2}}</li> {% endfor %}
 						</ul>
 					</div>
 				</div>
