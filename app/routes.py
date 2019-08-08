@@ -121,10 +121,10 @@ def shopping():
     existing_item = items.find_one({"item":request.form["item"]})
     user_collection.insert(userdata)
     if existing_item is None:
-        message1 = ": This item is not in your supermarket!"
+        message1 = "No, we are very sorry."
         return  render_template('profile.html', meals = meals, user_items = user_items, message1 = message1)
-    else:
-        message2 = ": This item is in your supermarket!"
+    elif existing_item is True :
+        message2 = "Yes!"
         return  render_template('profile.html', meals = meals, user_items = user_items, message2 = message2)
         
     

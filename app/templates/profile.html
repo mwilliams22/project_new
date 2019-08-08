@@ -7,7 +7,7 @@
 <html>
 
 <head>
-	<title>Profile</title>
+	<title>Profile: {{session['username']}} </title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="/static/new_assets/css/main2.css" />
@@ -61,7 +61,8 @@
 						</form>
 						<ul>
 							{% for item in user_items %}
-							<li>{{item.num}} {{item.item}} {{message1}}{{message2}}</li> {% endfor %}
+							<li>Number of items: {{item.num}} <br> Item: {{item.item}} <br> Is this item in your supermarket?: {{message1}}{{message2}}</li>
+							{% endfor %}
 						</ul>
 					</div>
 				</div>
